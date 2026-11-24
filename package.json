@@ -1,0 +1,21 @@
+{
+  "name": "magpie-plugin-3dr",
+  "version": "0.1.0",
+  "description": "Give your Magpie agent image and video generation, with specialized tools for architectural renders and interior design.",
+  "type": "module",
+  "main": "./index.js",
+  "files": ["index.js", "lib", "README.md", "README.zh-CN.md", "LICENSE"],
+  "keywords": ["magpie-plugin", "opencode-plugin", "image-generation", "video-generation", "architectural-rendering"],
+  "magpie": {
+    "name": "3DR Media Design",
+    "icon": "https://3droomdesign.ai/favicon.svg",
+    "summary": {
+      "en": "Give your agent image and video generation, with specialized tools for architectural renders, interior design and floor plans.",
+      "zh": "让您的 Agent 能生成图片和视频，并擅长建筑效果图、室内设计和户型图创作。"
+    }
+  },
+  "repository": "github:3droomdesign/magpie-plugin-3dr",
+  "homepage": "https://github.com/3droomdesign/magpie-plugin-3dr#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": { "test": "node --test test/*.test.js" }
+}
