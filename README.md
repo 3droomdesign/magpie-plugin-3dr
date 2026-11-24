@@ -6,6 +6,10 @@ Give your agent image and video generation, with specialized tools for architect
 
 ## Install and connect
 
+If your agent can run commands on this computer, send it this instruction:
+
+> Install the 3D Room Design plugin for Magpie from https://github.com/3droomdesign/magpie-plugin-3dr using its README. Open the website for me to authorize if needed, connect the plugin tools to this agent, and check the connection by quoting one interior image. Stop after the quote.
+
 On the computer that runs Magpie, use Node.js 22 or newer, npm and Git to install the 3dr CLI. Run these commands in your terminal. The login opens the 3D Room Design website, where you choose which tools to allow and how credits may be spent. If the same CLI profile is already connected, skip the login.
 
 ```sh
@@ -24,6 +28,8 @@ Ask your agent to try this first:
 A quote is free. To generate, submit the chosen parameters with a unique `request_id` and keep the returned `run_id`. An approval request includes a link to the site. Poll `get_run` for the result, then use `get_result` to inspect the asset. After an interruption, retry the same generation with its original parameters and `request_id`. To save an original to disk, run `3dr download <asset_ref> <destination>` on the computer with the authorization.
 
 ## Profiles and troubleshooting
+
+To start from a local photo or sketch, run `3dr upload ./room.jpg` and give the returned asset reference to your agent. With a named profile, use the same profile for uploads and downloads, for example `3dr --profile design upload ./room.jpg`.
 
 * **Only connection status is listed.** Run the plugin’s `connection_status` tool for the reason. Confirm `3dr tools` lists the tools under the same profile and site. After login, a permission change or a resolved connectivity issue, switch the plugin off and on in Magpie, then refresh the agent’s tools.
 * **Separate account or environment.** Production is the default. To select an existing device grant, run `3dr login --profile=design` and `magpie plugin options magpie-plugin-3dr '{"profile":"design"}'`. For a different site, set `THREEDR_SITE_ORIGIN` for login and for the Magpie process, or set the plugin’s `siteOrigin` option to that same origin. Options are edited together as a JSON object.

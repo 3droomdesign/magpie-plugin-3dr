@@ -6,6 +6,10 @@
 
 ## 安装与连接
 
+如果 Agent 能在这台电脑上执行命令，可以直接把这句话发给它：
+
+> 请按照 https://github.com/3droomdesign/magpie-plugin-3dr 的说明安装 Magpie 版 3D Room Design 插件，需要授权时打开官网让我确认。把插件工具接入当前 Agent，再查一张室内效果图的报价，拿到报价就结束。
+
 在运行 Magpie 的电脑上准备好 Node.js 22 或更高版本、npm 和 Git，然后在终端依次运行以下命令。登录会打开 3D Room Design 官网，您可以选择允许使用的工具和积分策略。如果这台电脑上同一份 CLI 配置已经完成授权，可跳过登录。
 
 ```sh
@@ -24,6 +28,8 @@ magpie tools
 报价免费。确定生成后，Agent 在提交时传入唯一的 `request_id`，并保存返回的 `run_id`。遇到需要确认的任务，打开返回的网站链接授权即可。用 `get_run` 查询进度，用 `get_result` 查看产物。网络中断后，使用原参数和同一个 `request_id` 重试。要把原图或视频保存到磁盘，在已授权的电脑上运行 `3dr download <asset_ref> <目标路径>`。
 
 ## 切换账号和排查连接
+
+要使用本机的房间照片或建筑草图，先运行 `3dr upload ./room.jpg`，再把返回的素材引用交给 Agent。如果为 Magpie 单独建了配置，上传和下载时请使用同一个配置，例如 `3dr --profile design upload ./room.jpg`。
 
 * **只看到连接状态工具。** 调用 `connection_status` 查看原因。在终端运行 `3dr tools`，确认所用站点和配置可以列出工具。登录、变更权限或恢复网络后，在 Magpie 中关闭再开启此插件，然后刷新 Agent 的工具列表。
 * **切换账号或环境。** 默认连接正式站。用 `3dr login --profile=design` 授权另一份配置，然后执行 `magpie plugin options magpie-plugin-3dr '{"profile":"design"}'`。连接其他站点时，给登录命令和 Magpie 进程设置相同的 `THREEDR_SITE_ORIGIN`，或在插件选项的 `siteOrigin` 中填写登录时使用的站点地址。修改选项时请在同一个 JSON 对象中保留需要的字段。
